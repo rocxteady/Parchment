@@ -63,7 +63,10 @@ final class PagingController: NSObject {
     select(pagingItem: pagingItem, animated: animated)
   }
   
-  func select(pagingItem: PagingItem, animated: Bool) {
+  func select(pagingItem: PagingItem, animated: Bool, tempState: PagingState? = nil) {
+    if let tempState = tempState {
+        self.state = tempState
+    }
     switch state {
     case .empty:
       state = .selected(pagingItem: pagingItem)

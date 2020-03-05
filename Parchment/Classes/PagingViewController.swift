@@ -425,7 +425,11 @@ open class PagingViewController:
       pagingController.select(pagingItem: pagingItem, animated: animated)
     case let .finite(dataSource):
       let pagingItem = dataSource.items[index]
-      pagingController.select(pagingItem: pagingItem, animated: animated)
+      var state: PagingState?
+      if pageViewController.delegate == nil {
+        state = .empty
+      }
+      pagingController.select(pagingItem: pagingItem, animated: false, tempState: state)
     case .none:
       fatalError("select(index:animated:): You need to set the dataSource property to use this method")
     }
